@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MedLens 医疗 AR 智能眼镜交互式课程原型">
+  <title>MedLens | 医疗 AR 智能眼镜原型</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- 内联 SVG 图标作为网站图标，避免外部资源加载失败 -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a1930'/%3E%3Cpath d='M10 32h12l4-10 8 20 6-12h14' stroke='%232ee6c7' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <div class="app">
+    <!-- 侧边导航 -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" width="28" height="28">
+            <rect x="2" y="8" width="32" height="20" rx="6" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="12" cy="18" r="3.2" fill="currentColor"/>
+            <circle cx="24" cy="18" r="3.2" fill="currentColor"/>
+            <path d="M2 18h5M29 18h5" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div>
+          <strong>MedLens</strong>
+          <span>AR 医疗辅助原型</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="主导航">
+        <button class="nav-btn is-active" data-view="home" type="button">
+          <span class="nav-ico" aria-hidden="true">▣</span> 总览首页
+        </button>
+        <button class="nav-btn" data-view="trauma" type="button">
+          <span class="nav-ico" aria-hidden="true">✚</span> 外伤应急辅助
+        </button>
+        <button class="nav-btn" data-view="meds" type="button">
+          <span class="nav-ico" aria-hidden="true">◉</span> 智能用药助手
+        </button>
+        <button class="nav-btn" data-view="rehab" type="button">
+          <span class="nav-ico" aria-hidden="true">↻</span> 康复训练引导
+        </button>
+        <button class="nav-btn" data-view="visit" type="button">
+          <span class="nav-ico" aria-hidden="true">▤</span> 智能就诊助手
+        </button>
+      </nav>
+
+      <div class="sidebar-note">
+        课程作业原型 · 不替代医生诊疗
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <!-- 顶部状态栏：模拟 AR 眼镜 HUD -->
+      <header class="topbar">
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="打开导航">☰</button>
+        <div class="hud-left">
+          <span class="hud-dot"></span>
+          <span>AR LINK 已连接</span>
+          <span class="sep">|</span>
+          <span id="hudTime">--:--:--</span>
+        </div>
+        <div class="hud-right">
+          <span>演示模式</span>
+          <span class="sep">|</span>
+          <span>电量 86%</span>
+        </div>
+      </header>
+
+      <main class="content">
+        <p class="global-disclaimer">
+          本页面为课程展示用交互原型，所有指引均为一般性说明，<strong>不能替代专业医疗诊断、急救或用药决策</strong>。如遇紧急情况请立即拨打当地急救电话。
+        </p>
+
+        <!-- 首页 -->
+        <section class="view is-active" id="view-home">
+          <div class="hero card">
+            <p class="eyebrow">Medical AR Glasses MVP</p>
+            <h1>MedLens 医疗 AR 智能眼镜</h1>
+            <p class="lead">
+              通过网页模拟未来医疗 AR 眼镜的抬头显示与交互：外伤应急记录、用药提醒、康复训练引导，以及就诊前信息整理。数据仅保存在本机浏览器中。
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" data-view="trauma" type="button">进入外伤辅助</button>
+              <button class="btn btn-ghost" data-view="visit" type="button">整理就诊摘要</button>
+            </div>
+          </div>
+
+          <div class="module-grid">
+            <button class="module-card card" data-view="trauma" type="button">
+              <span class="tag">模块 01</span>
+              <h2>外伤应急辅助</h2>
+              <p>记录受伤部位与经过，查看一般性安全提示，并保存可回看的事件记录。</p>
+            </button>
+            <button class="module-card card" data-view="meds" type="button">
+              <span class="tag">模块 02</span>
+              <h2>智能用药助手</h2>
+              <p>按医嘱录入药品与提醒时间。网页打开期间可检查提醒，支持可选语音播报。</p>
+            </button>
+            <button class="module-card card" data-view="rehab" type="button">
+              <span class="tag">模块 03</span>
+              <h2>康复训练引导</h2>
+              <p>用滑块模拟动作角度，查看达标状态与进度，保存训练记录。</p>
+            </button>
+            <button class="module-card card" data-view="visit" type="button">
+              <span class="tag">模块 04</span>
+              <h2>智能就诊助手</h2>
+              <p>把症状与病史整理成结构清晰的就诊摘要，便于复制给医生参考。</p>
+            </button>
+          </div>
+
+          <div class="stats-grid" id="homeStats"></div>
+
+          <section class="card">
+            <div class="card-head">
+              <h2>最近活动</h2>
+              <button class="btn btn-ghost btn-sm" id="clearActivityBtn" type="button">清空活动</button>
+            </div>
+            <ul class="history-list" id="homeActivity"></ul>
+          </section>
+        </section>
+
+        <!-- 外伤应急 -->
+        <section class="view" id="view-trauma" hidden>
+          <header class="view-head">
+            <h1>外伤应急辅助</h1>
+            <p>记录现场情况并查看一般性安全提示。以下内容不是个体化急救方案。</p>
+          </header>
+
+          <div class="split">
+            <form class="card form" id="traumaForm">
+              <label>受伤部位
+                <select name="part" required>
+                  <option value="">请选择</option>
+                  <option>头部</option>
+                  <option>颈部</option>
+                  <option>胸部</option>
+                  <option>腹部</option>
+                  <option>上肢</option>
+                  <option>下肢</option>
+                  <option>背部</option>
+                  <option>其他</option>
+                </select>
+              </label>
+              <label>受伤类型
+                <select name="type" required>
+                  <option value="">请选择</option>
+                  <option>擦伤</option>
+                  <option>裂伤</option>
+                  <option>挫伤</option>
+                  <option>出血</option>
+                  <option>扭伤</option>
+                  <option>烫伤</option>
+                  <option>其他</option>
+                </select>
+              </label>
+              <label>受伤经过与情况描述
+                <textarea name="story" rows="5" required maxlength="800" placeholder="请用自己的话描述时间、地点和目前情况（演示数据即可）"></textarea>
+              </label>
+              <button class="btn btn-primary" type="submit">保存外伤事件记录</button>
+            </form>
+
+            <div class="stack">
+              <article class="card hud-panel">
+                <h2>一般性安全指引</h2>
+                <ul class="guide-list" id="traumaGuide">
+                  <li>如情况危急，优先拨打当地急救电话（中国大陆可拨打 120）。</li>
+                  <li>保持伤者呼吸道通畅，尽量不要随意搬动疑似脊柱损伤者。</li>
+                  <li>可见明显外出血时，可用干净敷料持续按压止血。</li>
+                  <li>化学物质接触或烫伤，应尽快离开危险源并用大量清水冲洗（时间允许且环境安全时）。</li>
+                  <li>以上仅为公开急救常识整理，具体处置请听从专业人员指导。</li>
+                </ul>
+              </article>
+              <article class="card alert-card">
+                <h2>紧急求助提示</h2>
+                <p>本原型无法呼叫急救。请立即使用手机拨打急救电话，并告知地点、伤情和伤者意识情况。</p>
+              </article>
+            </div>
+          </div>
+
+          <section class="card">
+            <div class="card-head">
+              <h2>外伤历史记录</h2>
+            </div>
+            <ul class="history-list" id="traumaHistory"></ul>
+          </section>
+        </section>
+
+        <!-- 用药助手 -->
+        <section class="view" id="view-meds" hidden>
+          <header class="view-head">
+            <h1>智能用药助手</h1>
+            <p>请填写医生已经告知的药品与剂量。本模块<strong>不会</strong>生成剂量、禁忌或个体化用药建议。</p>
+          </header>
+
+          <div class="split">
+            <form class="card form" id="medsForm">
+              <label>药品名称
+                <input name="name" required maxlength="80" placeholder="例如：阿司匹林肠溶片（示例名）">
+              </label>
+              <label>医嘱剂量
+                <input name="dose" required maxlength="80" placeholder="请按处方原文填写，例如：每次 1 片">
+              </label>
+              <label>提醒时间
+                <input name="time" type="time" required>
+              </label>
+              <label>注意事项（可选）
+                <textarea name="note" rows="3" maxlength="400" placeholder="可粘贴医嘱中的注意事项，勿自行编造"></textarea>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" id="voiceToggle"> 到达提醒时间时尝试语音播报
+              </label>
+              <button class="btn btn-primary" type="submit">加入用药计划</button>
+            </form>
+
+            <article class="card hud-panel">
+              <h2>提醒说明</h2>
+              <ul class="guide-list">
+                <li>提醒仅在本网页保持打开时检查，大约每 20 秒对照一次当前时间。</li>
+                <li><strong>网页关闭、休眠或浏览器后台限制时，不能保证持续提醒。</strong></li>
+                <li>请以医生处方和药师说明为准，切勿根据本页面自行调整用药。</li>
+              </ul>
+              <p class="status-line" id="medsClock">当前检查时间：--</p>
+            </article>
+          </div>
+
+          <section class="card">
+            <div class="card-head">
+              <h2>用药计划列表</h2>
+            </div>
+            <ul class="history-list" id="medsList"></ul>
+          </section>
+        </section>
+
+        <!-- 康复训练 -->
+        <section class="view" id="view-rehab" hidden>
+          <header class="view-head">
+            <h1>康复训练引导</h1>
+            <p>角度来自页面滑块，<strong>是模拟值，不是真实人体动作识别结果</strong>。正式康复请在治疗师指导下进行。</p>
+          </header>
+
+          <div class="split">
+            <form class="card form" id="rehabSetup">
+              <label>演示动作
+                <select name="exercise" id="rehabExercise">
+                  <option value="shoulder">肩部抬举</option>
+                  <option value="elbow">肘关节屈伸</option>
+                  <option value="knee">膝关节屈伸</option>
+                </select>
+              </label>
+              <p class="hint" id="rehabHint">抬起上臂，用滑块模拟肩部抬举角度。</p>
+              <label>演示目标角度（度）
+                <input name="target" id="rehabTarget" type="number" min="10" max="180" value="90" required>
+              </label>
+              <div class="btn-row">
+                <button class="btn btn-primary" id="rehabStart" type="button">开始训练</button>
+                <button class="btn btn-ghost" id="rehabEnd" type="button">结束训练</button>
+                <button class="btn btn-ghost" id="rehabSave" type="button">保存训练记录</button>
+              </div>
+              <p class="status-line" id="rehabSession">训练状态：未开始</p>
+            </form>
+
+            <article class="card hud-panel rehab-hud">
+              <h2>模拟动作 HUD</h2>
+              <div class="gauge-wrap">
+                <div class="gauge" id="rehabGauge" aria-hidden="true"></div>
+                <div class="gauge-readout">
+                  <strong id="rehabCurrentLabel">0°</strong>
+                  <span>模拟当前角度</span>
+                </div>
+              </div>
+              <label class="slider-label">模拟当前角度
+                <input type="range" id="rehabSlider" min="0" max="180" value="0">
+              </label>
+              <div class="progress">
+                <div class="progress-bar" id="rehabBar"></div>
+              </div>
+              <p class="status-pill" id="rehabStatus">等待开始</p>
+              <p class="hint" id="rehabFeedback">请先点击「开始训练」，再用滑块模拟动作角度。</p>
+            </article>
+          </div>
+
+          <section class="card">
+            <div class="card-head">
+              <h2>训练历史</h2>
+            </div>
+            <ul class="history-list" id="rehabHistory"></ul>
+          </section>
+        </section>
+
+        <!-- 就诊助手 -->
+        <section class="view" id="view-visit" hidden>
+          <header class="view-head">
+            <h1>智能就诊助手</h1>
+            <p>把你已经知道的信息整理成摘要，方便就医时陈述。<strong>本模块不生成疾病诊断结论。</strong></p>
+          </header>
+
+          <div class="split">
+            <form class="card form" id="visitForm">
+              <label>主要症状
+                <input name="symptom" required maxlength="120" placeholder="例如：咽喉疼痛（示例）">
+              </label>
+              <label>持续时间
+                <input name="duration" required maxlength="80" placeholder="例如：约 2 天">
+              </label>
+              <label>自述程度
+                <select name="level" required>
+                  <option value="">请选择</option>
+                  <option>轻度</option>
+                  <option>中度</option>
+                  <option>较重</option>
+                </select>
+              </label>
+              <label>伴随症状
+                <textarea name="extra" rows="2" maxlength="300" placeholder="可填写发热、咳嗽等，没有可写「无」"></textarea>
+              </label>
+              <label>相关病史
+                <textarea name="history" rows="2" maxlength="300" placeholder="已知慢性病或过敏史，没有可写「不详」"></textarea>
+              </label>
+              <label>相关用药信息
+                <textarea name="meds" rows="2" maxlength="300" placeholder="近期用过的药物（按实际情况填写）"></textarea>
+              </label>
+              <button class="btn btn-primary" type="submit">生成就诊摘要</button>
+            </form>
+
+            <article class="card hud-panel">
+              <h2>就诊摘要</h2>
+              <textarea id="visitSummary" rows="12" placeholder="生成后可在此编辑摘要"></textarea>
+              <div class="btn-row">
+                <button class="btn btn-primary" id="visitCopy" type="button">复制摘要</button>
+                <button class="btn btn-ghost" id="visitSave" type="button">保存摘要</button>
+              </div>
+            </article>
+          </div>
+
+          <section class="card">
+            <div class="card-head">
+              <h2>历史摘要</h2>
+            </div>
+            <ul class="history-list" id="visitHistory"></ul>
+          </section>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="nav-backdrop" id="navBackdrop"></div>
+  <script src="script.js"></script>
+</body>
+</html>
